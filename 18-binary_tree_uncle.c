@@ -7,16 +7,19 @@
 */
 binary_tree_t *binary_tree_uncle(binary_tree_t *node)
 {
-	if (node == NULL)
+	binary_tree_t *Grandparent;
+
+	if (node == NULL || node->parent->parent == NULL)
 	{
 		return (NULL);
 	}
-	if (node->parent->parent == NULL)
+	Grandparent = node->parent->parent;
+	if (Grandparent->left == node->parent)
 	{
-		return (NULL);
+		return (Grandparent->right);
 	}
-	if (node->parent->left == node)
-		return (node->parent->parent->left);
 	else
-		return (node->parent->parent->right);
+	{
+		return (Grandparent->left);
+	}
 }
